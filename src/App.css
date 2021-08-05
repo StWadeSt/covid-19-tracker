@@ -1,10 +1,30 @@
 *{
   margin: 0;
+  padding: 10px;
+}
+.app{
+  display: flex;
+  justify-content: space-between;
 }
 
-.header{
+.header, .statistics{
   display: flex;
   align-items: center;
   margin-bottom: 20px;
   justify-content: space-around;
+}
+
+.leftside{
+  flex: 0.9;
+}
+
+@media (max-width: 990px){
+  .app{
+    flex-direction: column;
+  }
+}
+@media (max-width: 360px){
+  .statistics{
+    flex-direction: column;
+  }
 }
