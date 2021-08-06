@@ -4,6 +4,9 @@ import './App.css';
 import InfoBox from "./components/infoBox";
 import Map from "./components/map";
 import Table from "./components/table";
+import { sortData } from "./components/util";
+import LineGraph from "./components/LineGraph";
+
 
 function App() {
 
@@ -18,7 +21,7 @@ function App() {
     .then(data => {
       setCountryInfo(data);
     });
-  }, [])
+  }, []);
 
   useEffect(() => {
     const getCountryData = async() => {
@@ -31,7 +34,9 @@ function App() {
             value: country.countryInfo.iso2 //Abriviation for the contry. Ex. USA, RSA, UK
           }
         ));
-        setTableData(data);
+
+        const sortedData = sortData(data);
+        setTableData(sortedData);
         setCountries(countries);
       });
     };
@@ -98,6 +103,7 @@ function App() {
             <h3> Live Cases</h3>
             <Table countries={tableData}/>
             <h3> Worldwide New Cases</h3>
+            <LineGraph />
           </CardContent>
       </Card>
 

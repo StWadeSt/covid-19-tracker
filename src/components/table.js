@@ -1,4 +1,6 @@
 import React from 'react'
+import './Table.css';
+
 
 const Table = ({ countries }) => {
     return <div className="table">
