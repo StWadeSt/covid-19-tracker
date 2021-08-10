@@ -6,6 +6,7 @@ import Map from "./components/map";
 import Table from "./components/table";
 import { sortData } from "./components/util";
 import LineGraph from "./components/LineGraph";
+import "leaflet/dist/leaflet.css";
 
 
 function App() {
@@ -14,6 +15,11 @@ function App() {
   const [country, setCountry] = useState("worldwide");
   const [countryInfo, setCountryInfo] = useState({});
   const [tableData, setTableData] = useState([]);
+  const [mapCenter, setMapCenter] = useState({ lat: 34.80746, lng: -40.4796 });
+  const [mapZoom, setMapZoom] = useState(3);
+  const [mapCountries, setMapCountries] = useState([]);
+  const [casesType, setCasesType] = useState("cases");
+
 
   useEffect(() => {
     fetch("https://disease.sh/v3/covid-19/all")
@@ -37,6 +43,7 @@ function App() {
 
         const sortedData = sortData(data);
         setTableData(sortedData);
+        setMapCountries(data);
         setCountries(countries);
       });
     };
@@ -57,13 +64,13 @@ function App() {
      .then(response => response.json())
      .then((data) => {
         setCountry(countryCode);
-
         //All of the data for the specific country
         setCountryInfo(data);
+
+        setMapCenter([data.countryInfo.lat, data.countryInfo.long]);
+        setMapZoom(4);
      });
   };
-
-  console.log('Country Info...', countryInfo);
 
   return (
     <div className="app">
@@ -87,15 +94,32 @@ function App() {
 
         {/* Body */}
           <div className="statistics">
+            
                 {/* InfoBox for Covid Cases */}
-                <InfoBox title="New Cases" cases= {countryInfo.todayCases} total={countryInfo.cases}/>
+                <InfoBox 
+                  title="New Cases" 
+                  cases= {countryInfo.todayCases}
+                  total={countryInfo.cases}
+                 />
+
                 {/* InfoBox for Covid Recoveries */}
-                <InfoBox title="Latest Recoveries" cases= {countryInfo.todayRecovered} total={countryInfo.recovered}/>
-                {/* */}
-                <InfoBox title="Covid Deaths" cases= {countryInfo.todayDeaths} total={countryInfo.deaths}/>
+                <InfoBox 
+                  title="Latest Recoveries"
+                  cases= {countryInfo.todayRecovered}
+                  total={countryInfo.recovered}
+                  />
+
+                {/* InfoBox for Covid Deaths*/}
+                <InfoBox 
+                  title="Covid Deaths"
+                  cases= {countryInfo.todayDeaths} 
+                  total={countryInfo.deaths}
+                 />
+
           </div>
 
-          <Map/>
+          {/*----*************MAP***********--------- */}
+          <Map countries={mapCountries} center={mapCenter} zoom={mapZoom}/>
       </div>
 
       <Card className="rightside">
@@ -103,7 +127,7 @@ function App() {
             <h3> Live Cases</h3>
             <Table countries={tableData}/>
             <h3> Worldwide New Cases</h3>
-            <LineGraph />
+            <LineGraph casesType={casesType} />
           </CardContent>
       </Card>
 

@@ -1,3 +1,28 @@
+import React from "react";
+import numeral from "numeral";
+import { Circle, Popup } from "react-leaflet";
+
+const casesTypeColor ={
+    cases: {
+        hex: "#CC1034",
+        rgb: "rgb(204, 16, 52)",
+        half_op: "rgba(204, 16, 52, 0.5)",
+        multiplier: 400,
+      },
+      recovered: {
+        hex: "#7dd71d",
+        rgb: "rgb(125, 215, 29)",
+        half_op: "rgba(125, 215, 29, 0.5)",
+        multiplier: 600,
+      },
+      deaths: {
+        hex: "#fb4443",
+        rgb: "rgb(251, 68, 67)",
+        half_op: "rgba(251, 68, 67, 0.5)",
+        multiplier: 1000,
+      },
+};
+
 export const sortData = (data) =>{
     const sortedData = [...data];
 
@@ -14,3 +39,23 @@ export const sortData = (data) =>{
 
     return sortedData;
 };
+
+
+//Draw circels on the map with interactive tooltop showing cases for the country
+export const showDataOnMap = (data, casesType = "cases") => (
+    data.map(country =>(
+        <Circle 
+            center={ [country.countryInfo.lat, country.countryInfo.long] }
+            fillOpacity={0.4}
+            color={casesTypeColor[casesType].hex}
+            fillColor={casesTypeColor[casesType].hex}
+            radius={
+                Math.sqrt(country[casesType]) * casesTypeColor[casesType].multiplier
+              }
+        >
+            <Popup>
+                <h1>Popup!!!</h1>
+            </Popup>
+        </Circle>
+    ))
+);
