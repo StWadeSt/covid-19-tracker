@@ -3,13 +3,13 @@ import { Line } from "react-chartjs-2";
 import numeral from "numeral";
 
 const options = {
-  legend: {
-    display: false,
-  },
   elements: {
     point: {
       radius: 0,
     },
+  },
+  plugins: {
+    legend: false,
   },
   maintainAspectRatio: false,
   tooltips: {
@@ -47,7 +47,7 @@ const options = {
   },
 };
 
-const formatChartData = (data, casesType = "cases" ) => {
+const formatChartData = (data, casesType) => {
   let chartData = [];
   let lastDataPoint;
   for (let date in data.cases) {
@@ -63,7 +63,7 @@ const formatChartData = (data, casesType = "cases" ) => {
   return chartData;
 };
 
-function LineGraph({ casesType = 'cases' }) {
+function LineGraph({ casesType = 'cases', ...props }) {
   const [data, setData] = useState({});
 
   useEffect(() => {
@@ -84,7 +84,7 @@ function LineGraph({ casesType = 'cases' }) {
   }, [casesType]);
 
   return (
-    <div>
+    <div className={props.className}>
       {data?.length > 0 && (
         <Line
           data={{
@@ -99,7 +99,6 @@ function LineGraph({ casesType = 'cases' }) {
           options={options}
         />
       )}
-
     </div>
   );
 }

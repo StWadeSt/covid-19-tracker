@@ -12,7 +12,7 @@ function Map({countries, casesType, center, zoom }){
                 attribution= '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                 />
 
-                {showDataOnMap(countries, casesType)}}
+                {showDataOnMap(countries, casesType)}
             </LeafletMap>
         </div>
     );

@@ -40,6 +40,14 @@ export const sortData = (data) =>{
     return sortedData;
 };
 
+//Print the new cases in nice format
+export const printPrettyStat = (stat) => 
+    stat ? `+${numeral(stat).format("0a")}` : "Unavailable";
+//Print the totals in nice format
+export const printTotalStat = (stat) => 
+    stat ? `${numeral(stat).format("0.0a")}` : "Unavailable";
+
+
 
 //Draw circels on the map with interactive tooltop showing cases for the country
 export const showDataOnMap = (data, casesType = "cases") => (
@@ -54,7 +62,13 @@ export const showDataOnMap = (data, casesType = "cases") => (
               }
         >
             <Popup>
-                <h1>Popup!!!</h1>
+            <div className="popup-container">
+                <div className="popup-flag" style={{ backgroundImage: `url(${country.countryInfo.flag})`}} />
+                <div className="popup-country">{country.country}</div>
+                <div className="popup-cases">Cases: {numeral(country.cases).format("0,0")}</div>
+                <div className="popup-recovered">Recovered: {numeral(country.recovered).format("0,0")}</div>
+                <div className="popup-deaths">Deaths: {numeral(country.deaths).format("0,0")}</div>
+            </div>
             </Popup>
         </Circle>
     ))

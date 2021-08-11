@@ -14,8 +14,27 @@
   justify-content: space-around;
 }
 
+.rightside{
+  display: flex;
+  flex-direction: column;
+}
+
+.rightside .MuiCardContent-root{
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.chartTitle{
+  padding-top: 10px !important;
+}
+
+.lineGraph{
+  flex-grow: 1;
+}
+
 .leftside{
-  flex: 0.9;
+  flex: 0.8;
 }
 
 @media (max-width: 990px){
