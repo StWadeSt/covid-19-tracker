@@ -30,7 +30,7 @@ export const sortData = (data) =>{
     //return sortedData.sort((a, b) => a.cases > b.cases ? -1 : 1);
 
     sortedData.sort((a, b) => {
-        if( a.cases > b.cases){
+        if( a.active > b.active ){
             return -1;
         }else{
             return 1;

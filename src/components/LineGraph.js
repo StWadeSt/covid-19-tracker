@@ -47,7 +47,7 @@ const options = {
   },
 };
 
-const formatChartData = (data, casesType) => {
+const formatChartData = (data, casesType = 'cases') => {
   let chartData = [];
   let lastDataPoint;
   for (let date in data.cases) {
