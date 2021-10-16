@@ -1,49 +1,51 @@
-*{
+* {
   margin: 0;
   padding: 10px;
 }
-.app{
+.app {
   display: flex;
   justify-content: space-between;
+  background-color: transparent;
 }
 
-.header, .statistics{
+.header,
+.statistics {
   display: flex;
   align-items: center;
   margin-bottom: 20px;
   justify-content: space-around;
 }
 
-.rightside{
+.rightside {
   display: flex;
   flex-direction: column;
 }
 
-.rightside .MuiCardContent-root{
+.rightside .MuiCardContent-root {
   display: flex;
   flex-direction: column;
   flex-grow: 1;
 }
 
-.chartTitle{
+.chartTitle {
   padding-top: 10px !important;
 }
 
-.lineGraph{
+.lineGraph {
   flex-grow: 1;
 }
 
-.leftside{
-  flex: 0.8;
+.leftside {
+  flex: 0.9;
 }
 
-@media (max-width: 990px){
-  .app{
+@media (max-width: 990px) {
+  .app {
     flex-direction: column;
   }
 }
-@media (max-width: 360px){
-  .statistics{
+@media (max-width: 360px) {
+  .statistics {
     flex-direction: column;
   }
 }
